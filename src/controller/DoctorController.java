@@ -32,4 +32,14 @@ public class DoctorController {
     public boolean deleteDoctor(int id) {
         return doctorDAO.deleteDoctor(id);
     }
+
+    // Add this method to save data
+    public void saveData() {
+        ((DoctorDAOImpl) doctorDAO).saveToFile();
+    }
+
+    // Add this method to load data
+    public void loadData() {
+        ((DoctorDAOImpl) doctorDAO).loadFromFile();
+    }
 }

@@ -14,7 +14,7 @@ public class PatientController {
 
     public void addPatient(Patient patient) {
         patientDAO.addPatient(patient);
-        System.out.println("✅ Patient registered successfully!");
+        System.out.println("✅ Patient added successfully!");
     }
 
     public Patient getPatientById(int id) {
@@ -31,5 +31,15 @@ public class PatientController {
 
     public boolean deletePatient(int id) {
         return patientDAO.deletePatient(id);
+    }
+
+    // Add this method to save data
+    public void saveData() {
+        ((PatientDAOImpl) patientDAO).saveToFile();
+    }
+
+    // Add this method to load data
+    public void loadData() {
+        ((PatientDAOImpl) patientDAO).loadFromFile();
     }
 }

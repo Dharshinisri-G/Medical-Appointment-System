@@ -12,6 +12,15 @@ public class Main {
     private static User loggedInUser = null; // To store the currently logged-in user
 
     public static void main(String[] args) {
+        // Add a shutdown hook to save data when the program exits
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Saving data before exiting...");
+            userController.saveData();
+            doctorController.saveData();
+            patientController.saveData();
+            appointmentController.saveData();
+        }));
+
         while (true) {
             System.out.println("\n===== Medical Appointment System =====");
             System.out.println("1. Register");
@@ -63,20 +72,25 @@ public class Main {
         switch (role) {
             case "doctor":
                 System.out.println("Enter Specialization:");
-                String specialization=scanner.nextLine();
+                String specialization = scanner.nextLine();
                 System.out.println("Enter HospitalId:");
-                int hospitalId=scanner.nextInt();
+                int hospitalId = scanner.nextInt();
                 scanner.nextLine();
-                newUser = new Doctor(name, email, contact, age, dob, address, username, password,specialization,hospitalId);
+                newUser = new Doctor(name, email, contact, age, dob, address, username, password, specialization, hospitalId);
                 doctorController.addDoctor((Doctor) newUser);
+                userController.registerUser(newUser);
+                userController.saveData();// Add to UserDAO
                 break;
             case "patient":
                 newUser = new Patient(name, email, contact, age, dob, address, username, password);
                 patientController.addPatient((Patient) newUser);
+                userController.registerUser(newUser);
+                userController.saveData();// Add to UserDAO
                 break;
             case "admin":
                 newUser = new Admin(name, email, contact, age, dob, address, username, password);
                 userController.registerUser(newUser);
+                userController.saveData();
                 break;
             default:
                 System.out.println("❌ Invalid role! Registration failed.");
@@ -84,7 +98,6 @@ public class Main {
         }
         System.out.println("✅ Registration successful!");
     }
-
 
     private static void loginUser() {
         System.out.println("\n--- Login ---");
@@ -192,8 +205,7 @@ public class Main {
         System.out.print("Enter Time (HH:MM): ");
         String time = scanner.nextLine();
 
-        Appointment newAppointment;
-        newAppointment = new Appointment(loggedInUser.getId(), doctorId, date, time);
+        Appointment newAppointment = new Appointment(loggedInUser.getId(), doctorId, date, time);
         appointmentController.bookAppointment(newAppointment);
         System.out.println("✅ Appointment booked successfully!");
     }

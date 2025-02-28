@@ -1,8 +1,9 @@
 package model;
-
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Appointment {
+public class Appointment implements Serializable {
+
     private int id;
     private int patientId;
     private int doctorId;
@@ -19,18 +20,36 @@ public class Appointment {
         this.status = "Scheduled";
     }
 
-    public Appointment(int patientId,int doctorId, String date, String time) {
-        this.patientId=patientId;
+    public Appointment(int patientId, int doctorId, String date, String time) {
+        this.patientId = patientId;
         this.doctorId = doctorId;
+        this.dateTime = LocalDateTime.parse(date + "T" + time); // Parse combined date-time
         this.status = "Scheduled";
     }
 
-    public int getId() { return id; }
-    public int getPatientId() { return patientId; }
-    public int getDoctorId() { return doctorId; }
-    public int getHospitalId() { return hospitalId; }
-    public LocalDateTime getDateTime() { return dateTime; }
-    public String getStatus() { return status; }
+    public int getId() {
+        return id;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public int getHospitalId() {
+        return hospitalId;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 
     public void updateStatus(String status) {
         this.status = status;

@@ -36,4 +36,14 @@ public class UserController {
     public boolean deleteUser(int id) {
         return userDAO.deleteUser(id);
     }
+
+    // Add this method to save data
+    public void saveData() {
+        ((UserDAOImpl) userDAO).saveToFile();
+    }
+
+    // Add this method to load data
+    public void loadData() {
+        ((UserDAOImpl) userDAO).loadFromFile();
+    }
 }

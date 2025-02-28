@@ -1,6 +1,9 @@
 package model;
 
-public class HospitalAdmin extends User {
+import java.io.Serializable;
+
+public class HospitalAdmin extends User implements Serializable {
+
     private int hospitalId;
 
     public HospitalAdmin(String name, String email, String contact, int age, String dob, String address, String username, String password, int hospitalId) {
@@ -8,7 +11,9 @@ public class HospitalAdmin extends User {
         this.hospitalId = hospitalId;
     }
 
-    public int getHospitalId() { return hospitalId; }
+    public int getHospitalId() {
+        return hospitalId;
+    }
 
     @Override
     public void displayDetails() {
