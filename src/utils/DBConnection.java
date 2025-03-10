@@ -8,17 +8,7 @@ public class DBConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/medical_db";
     private static final String USER = "root";  // Change if needed
     private static final String PASSWORD = "Mysql@225";  // Change if needed
-
-    public static Connection getConnection() {
-        try {
-            // Load MySQL JDBC Driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            return DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("MySQL Driver not found! Make sure the connector JAR is added.", e);
-        } catch (SQLException e) {
-            throw new RuntimeException("Database connection error!", e);
-        }
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(URL,USER,PASSWORD);
     }
 }

@@ -1,22 +1,23 @@
 package models;
-
 import java.util.Date;
-
 public class Appointment {
-    private int id;
-    private int patientId;
-    private int doctorId;
-    private Date appointmentDate;
+    private int AppointmentId;
+    private int DoctorId;
+    private int PatientId;
+    private Date Date;
 
-    public Appointment(int id, int patientId, int doctorId, Date appointmentDate) {
-        this.id = id;
-        this.patientId = patientId;
-        this.doctorId = doctorId;
-        this.appointmentDate = appointmentDate;
+    public Appointment(int DoctorId,int PatientId,Date Date){
+        this.DoctorId=DoctorId;
+        this.PatientId=PatientId;
+        this.Date=Date;
     }
 
-    public int getId() { return id; }
-    public int getPatientId() { return patientId; }
-    public int getDoctorId() { return doctorId; }
-    public Date getAppointmentDate() { return appointmentDate; }
+    public int getAppointmentId(){return AppointmentId;}
+    public int getDoctorId(){return DoctorId;}
+    public int getPatienId(){return PatientId;}
+    public Date getDate(){return Date;}
+
+    public String toString(){
+        return "AppointmentId: "+AppointmentId+" | DoctorId: "+DoctorId+" | PatientId: "+PatientId+" | Date: "+Date;
+    }
 }
